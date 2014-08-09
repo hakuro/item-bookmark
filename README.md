@@ -1,6 +1,6 @@
 # item-bookmark
 
-FIXME
+This web app is simple bookmark site, using clojure.
 
 ## Prerequisites
 
@@ -15,5 +15,7 @@ To start a web server for the application, run:
     lein ring server
 
 ## License
+ *   Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)
 
-Copyright © 2014 FIXME
+Copyright © 2014 hakuro
+
