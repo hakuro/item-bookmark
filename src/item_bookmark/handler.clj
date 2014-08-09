@@ -10,7 +10,8 @@
             [taoensso.timbre.appenders.rotor :as rotor]
             [selmer.parser :as parser]
             [environ.core :refer [env]]
-            [cronj.core :as cronj]))
+            [cronj.core :as cronj]
+            [item-bookmark.db.schema :as schema]))
 
 (defroutes app-routes
   (route/resources "/")
@@ -35,6 +36,10 @@
     {:path "item_bookmark.log" :max-size (* 512 1024) :backlog 10})
 
   (if (env :dev) (parser/cache-off!))
+  
+  ;;initialize schema if needed
+  (if-not (schema/initialized?) (schema/create-tables))
+
   ;;start the expired session cleanup job
   (cronj/start! session-manager/cleanup-job)
   (timbre/info "item-bookmark started successfully"))
